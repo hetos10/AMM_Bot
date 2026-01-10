@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: rover_bot
+    relative_path: description/rover_desc.xacro
+  srdf:
+    relative_path: config/rover.srdf
+  package_settings:
+    author_name: hetos10
+    author_email: hetchauhan22@gmail.com
+    generated_timestamp: 1768024467
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
