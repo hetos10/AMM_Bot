@@ -1,21 +1,37 @@
-# AMM_Bot
+# 🤖 AMM_Bot
 
-AMM_Bot (Autonomous Mobile Manipulator Bot) is a ROS 2 Humble based mobile robot with a robotic arm.
-The project uses Gazebo for simulation and RViz for visualization.
+AMM_Bot (Autonomous Mobile Manipulator Bot) is a ROS 2 Humble based mobile robot integrated with a robotic arm.
+The robot is simulated in Gazebo and visualized using RViz.
 It supports SLAM mapping, localization, autonomous navigation, and arm motion planning.
 
-This project is developed for learning and experimentation with ROS 2, Nav2, and MoveIt 2.
+This project focuses on understanding mobile manipulation using ROS 2, Nav2, and MoveIt 2.
 
-## Requirements
+---
 
-Ubuntu 22.04  
-ROS 2 Humble  
-Gazebo Fortress  
-Nav2  
-SLAM Toolbox  
-MoveIt 2  
+## ✨ Features
 
-## Installation
+🚗 Differential drive mobile base  
+🦾 Robotic arm integration  
+🌍 Gazebo simulation  
+👀 RViz visualization  
+🗺️ SLAM mapping  
+📍 Autonomous navigation (Nav2)  
+🧠 Motion planning (MoveIt 2)  
+
+---
+
+## 🧰 Requirements
+
+🖥️ Ubuntu 22.04  
+🤖 ROS 2 Humble Hawksbill  
+🌐 Gazebo Fortress  
+🧭 Navigation2  
+🗺️ SLAM Toolbox  
+🦾 MoveIt 2  
+
+---
+
+## ⚙️ Installation
 
 mkdir -p ~/rover_ws/src  
 cd ~/rover_ws/src  
@@ -25,41 +41,65 @@ rosdep install --from-paths src --ignore-src -r -y
 colcon build  
 source install/setup.bash  
 
-## Run Simulation
-
-ros2 launch rover_bot sim_gazebo.launch.py  
-
-## RViz
+---
+## 👁️ RViz Visualization
 
 ros2 launch rover_bot view_rviz.launch.py  
 
-## SLAM Mapping
+---
+
+## ▶️ Run Simulation
+
+ros2 launch rover_bot sim_gazebo.launch.py  
+
+---
+
+## 🗺️ SLAM Mapping
 
 ros2 launch rover_bot slam.launch.py  
 
-## Navigation
+---
+## 🗺️ SLAM Localisation
+####just change the mapping mode to localisation in yaml file
+
+ros2 launch rover_bot slam.launch.py  
+
+---
+#OR
+## AMCL Localisation
+
+ros2 launch rover_bot localisation.launch.py map:=/home/hetos_10/rover_ws/src/rover_bot/maps/map_save0.yaml
+
+---
+## 🚀 Navigation
 
 ros2 launch rover_bot navigation.launch.py  
 
-## Arm Planning
+---
+
+## 🦾 Arm Motion Planning
 
 ros2 launch rover_bot moveit.launch.py  
 
-## Folder Structure
+---
+
+## 📁 Folder Structure
 
 rover_ws/src  
 ├── moveit_setup  
 └── rover_bot  
-    ├── config  
-    ├── description  
-    ├── launch  
-    ├── maps  
-    ├── meshes  
-    ├── models  
-    ├── rviz  
-    └── worlds  
+  ├── config  
+  ├── description  
+  ├── launch  
+  ├── maps  
+  ├── meshes  
+  ├── models  
+  ├── rviz  
+  └── worlds  
 
-## Author
+---
+
+## 👤 Author
 
 Het Chauhan  
-GitHub: https://github.com/hetos10
+🔗 GitHub: https://github.com/hetos10
