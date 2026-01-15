@@ -1,0 +1,200 @@
+<?xml version="1.0" ?>
+<robot name="rover" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    <!-- GazeboClassic -->
+    <!-- <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <parameters>$(find rover_bot)/config/my_controllers.yaml</parameters>
+        </plugin>
+    </gazebo> -->
+    <!-- GazeboIgnition-->
+    <gazebo>
+      <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(find rover_bot)/config/my_controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+   
+    <!-- Front and back wheels  -->
+    <gazebo reference="right_wheel_link">
+        <mu1>1000000000000000.0</mu1>
+        <mu2>1000000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="left_wheel_link">
+        <mu1>1000000000000000.0</mu1>
+        <mu2>1000000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <!-- Caster Wheels -->
+    <gazebo reference="front_castor_link">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>1.0</maxVel>
+    </gazebo>
+
+    <gazebo reference="back_castor_link">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>1.0</maxVel>
+    </gazebo>
+
+    <gazebo reference="chassis">
+      <material>
+        <color rgba="1.0 1.0 1.0 0.8"/>
+      </material>
+    </gazebo>
+
+
+    <gazebo reference="base_arm">
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Orange</name>
+        </script>
+      </material>
+    </gazebo>
+
+    <gazebo reference="link_1">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Yellow</name>
+        </script>
+      </material>
+    </gazebo>
+
+    <gazebo reference="link_2">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Orange</name>
+        </script> 
+      </material>
+    </gazebo>
+    
+    <gazebo reference="link_3">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Yellow</name>
+        </script>
+      </material>
+    </gazebo>
+
+    <gazebo reference="link_4">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Orange</name>
+        </script> 
+      </material>
+    </gazebo>
+
+    <gazebo reference="link_5">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Yellow</name>
+        </script>
+      </material>
+    </gazebo>
+
+    <gazebo reference="link_6">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Orange</name>
+        </script> 
+      </material>
+    </gazebo>
+
+    <gazebo reference="laser_link">
+        <sensor name="lidar" type="gpu_lidar">
+            <pose>0 0 0.05 0 0 0</pose> <!-- Verify, if doesnot work then change-->
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <topic>scan</topic>
+            <update_rate>20</update_rate>
+            <gz_frame_id>laser_link</gz_frame_id> 
+            <lidar>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <resolution>1.00000</resolution>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.0500000</min> <!-- Done this much to prevent robot rod obstruction-->
+                    <max>20.0</max> <!-- Might consider changing according to real lidar values-->
+                    <resolution>0.02</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.00</mean>
+                    <stddev>0.001</stddev>
+                </noise>
+            </lidar>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="camera_link">
+        <material>Gazebo/Green</material>
+        <sensor name="camera" type="camera">
+          <pose> 0 0 0 0 0 0</pose>
+          <visualize>true</visualize>
+          <update_rate>10</update_rate>
+          <camera>
+            <camera_info_topic>camera/camera_info</camera_info_topic>
+            <horizontal_fov>1.089</horizontal_fov>
+              <image>
+                <format>R8G8B8</format>
+                <width>640</width>
+                <height>480</height>
+              </image>
+              <clip>
+                <near>0.05</near>
+                <far>8.0</far>
+              </clip>
+          </camera>
+          <topic>camera/image_raw</topic>
+          <gz_frame_id>camera_link_optical</gz_frame_id>
+        </sensor>
+    </gazebo>   
+
+    <gazebo>
+      <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+      </plugin>
+    </gazebo> 
+
+    
+</robot>  

@@ -1,0 +1,263 @@
+<?xml version="1.0" ?>
+<robot name="rover" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="create_link.xacro" /> 
+
+    <!-- <link name="base_footprint"/> -->
+
+    <link name="chassis">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="5.0"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.7 0.5 0.2"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.7 0.5 0.2"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+
+    <!-- Right Wheel -->
+    <link name="right_wheel_link">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1.0"/>
+            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.05"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.05"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <origin xyz="0.0 -0.275 0.15" rpy="1.57 0.0 0.0"/>
+        <parent link="chassis"/>
+        <child link="right_wheel_link"/>
+        <axis xyz="0.0 0.0 -1.0"/>
+    </joint>
+
+    <!-- Left Wheel -->
+    <link name="left_wheel_link">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1.0"/>
+            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.05"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.15" length="0.05"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <origin xyz="0.0 0.275 0.15" rpy="1.57 0.0 0.0"/>
+        <parent link="chassis"/>
+        <child link="left_wheel_link"/>
+        <axis xyz="0.0 0.0 -1.0"/>
+    </joint>
+
+    <!-- Front Castor -->
+    <link name="front_castor_link">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.5"/>
+            <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.045"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.045"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="front_castor_joint" type="fixed">
+        <origin xyz="0.25 0.0 0.05" rpy="0.0 0.0 0.0"/>
+        <parent link="chassis"/>
+        <child link="front_castor_link"/>
+    </joint>
+
+    <!-- Rear Castor -->
+    <link name="back_castor_link">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.5"/>
+            <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.045"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.045"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="back_castor_joint" type="fixed">
+        <origin xyz="-0.25 0.0 0.05" rpy="0.0 0.0 0.0"/>
+        <parent link="chassis"/>
+        <child link="back_castor_link"/>
+    </joint>
+
+
+    
+    <xacro:create_link
+        link_name="base_arm"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_0"
+    />
+
+    <xacro:create_link
+        link_name="link_1"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_1"
+    />
+
+    <xacro:create_link
+        link_name="link_2"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_2"
+    />
+
+    <xacro:create_link
+        link_name="link_3"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_3"
+    />
+
+    <xacro:create_link
+        link_name="link_4"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_4"
+    />
+
+    <xacro:create_link
+        link_name="link_5"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_5"
+    />
+
+    <xacro:create_link
+        link_name="mag_eef"
+        xyz_offset="0 0 0"
+        rpy_offset="0 0 0"
+        mesh_name="link_6"
+    />
+
+    <joint name="base_diff_arm" type="fixed">
+        <parent link="chassis"/>
+        <child link="base_arm"/>
+        <origin xyz="0 0 0.1" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="joint_1" type="revolute">
+        <parent link="base_arm"/>
+        <child link="link_1"/>
+        <origin xyz="0 0 0.061584" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
+    </joint>
+
+    <joint name="joint_2" type="revolute">
+        <parent link="link_1"/>
+        <child link="link_2"/>
+        <origin xyz="-0.101717 0 0.182284" rpy="${-pi/2} -${pi/3} ${pi/2}"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
+    </joint>
+
+    <joint name="joint_3" type="revolute">
+        <parent link="link_2"/>
+        <child link="link_3"/>
+        <origin xyz="0.685682 0 0.041861" rpy="0 ${pi} ${pi+pi/2}"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
+    </joint>
+
+    <joint name="joint_4" type="revolute">
+        <parent link="link_3"/>
+        <child link="link_4"/>
+        <origin xyz="0.518777 0 0.067458" rpy="0 ${pi} ${pi+pi/6}"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
+    </joint>
+
+    <joint name="joint_5" type="revolute">
+        <parent link="link_4"/>
+        <child link="link_5"/>
+        <origin xyz="0.112654 0 0.110903" rpy="${pi/2} ${pi} ${pi/2}"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
+    </joint>
+
+    <joint name="joint_6" type="revolute">
+        <parent link="link_5"/>
+        <child link="mag_eef"/>
+        <origin xyz="-0.085976 0 0.133436" rpy="0 ${-pi/2} 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="${-pi}" upper="${pi}" velocity="2.5"/>
+    </joint> 
+
+    
+
+</robot>
