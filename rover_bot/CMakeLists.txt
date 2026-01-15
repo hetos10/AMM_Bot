@@ -20,7 +20,7 @@ find_package(ros_gz_sim REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 install(
-  DIRECTORY launch description worlds config rviz models meshes scripts
+  DIRECTORY launch description worlds config rviz models meshes 
   DESTINATION share/${PROJECT_NAME}
 )
 
