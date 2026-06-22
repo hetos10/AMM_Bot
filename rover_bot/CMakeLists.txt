@@ -20,7 +20,7 @@ find_package(ros_gz_sim REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 install(
-  DIRECTORY launch description worlds config rviz models meshes 
+  DIRECTORY launch description worlds config rviz models meshes/collision meshes/visual
   DESTINATION share/${PROJECT_NAME}
 )
 
