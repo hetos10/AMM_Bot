@@ -68,18 +68,18 @@ ros2 launch rover_bot slam.launch.py
 #OR
 ## AMCL Localisation
 
-ros2 launch rover_bot localisation.launch.py map:=/home/hetos_10/rover_ws/src/rover_bot/maps/map_save0.yaml
+ros2 launch rover_bot localisation.launch.py map:=/home/hetos_10/rover_ws/src/rover_bot/maps/map_save0.yaml use_sim_time:=True
 
 ---
 ## 🚀 Navigation
 
-ros2 launch rover_bot navigation.launch.py  
+ros2 launch rover_bot navigation.launch.py  use_sim_time:=True
 
 ---
 
 ## 🦾 Arm Motion Planning
 
-ros2 launch rover_bot moveit.launch.py  
+ros2 launch rover_bot moveit.launch.py  use_sim_time:=True
 
 ---
 
