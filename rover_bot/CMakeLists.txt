@@ -23,39 +23,42 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
-# ── Executable ────────────────────────────────────────────────
-add_executable(my_pfm
-  script/my_pfm.cpp
-)
-ament_target_dependencies(my_pfm
-  rclcpp
-  sensor_msgs
-  nav_msgs
-  geometry_msgs
-  std_msgs
-  visualization_msgs
-  tf2
-  tf2_ros
-  tf2_geometry_msgs
-)
+# # ── Executable: full APF navigation node ─────────────────────
+# add_executable(my_pfm
+#   script/my_pfm.cpp
+# )
 
-# ── Include directories ───────────────────────────────────────
-target_include_directories(my_pfm PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-  ${EIGEN3_INCLUDE_DIR}
-)
+# ament_target_dependencies(my_pfm
+#   rclcpp
+#   sensor_msgs
+#   nav_msgs
+#   geometry_msgs
+#   std_msgs
+#   visualization_msgs
+#   tf2
+#   tf2_ros
+#   tf2_geometry_msgs
+# )
+
+# target_include_directories(my_pfm PUBLIC
+#   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#   $<INSTALL_INTERFACE:include>
+#   ${EIGEN3_INCLUDE_DIR}
+# )
+
+
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 install(
-  DIRECTORY launch description worlds config rviz models meshes script
+  DIRECTORY launch description worlds config rviz models meshes 
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(TARGETS my_pfm
-  DESTINATION lib/${PROJECT_NAME}
-)
+# install(TARGETS my_pfm 
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
 
 if(BUILD_TESTING)
